@@ -1,18 +1,26 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core'
+import { Component, ChangeDetectorRef } from '@angular/core'
 import { KeysService } from '../Services/keys.service'
 import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
 import { web3WalletABI } from '../../assets/public/ContractABIs'
-import { getDefaultProvider, ethers, BigNumber } from 'ethers'
+import { getDefaultProvider, ethers } from 'ethers'
 import {
   createClient,
   connect,
   disconnect,
   getAccount,
-  signMessage,
   InjectedConnector
 } from '@wagmi/core'
+import { MatIconModule } from '@angular/material/icon'
+import { FormsModule } from '@angular/forms'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field'
+import { TranslateModule } from '@ngx-translate/core'
+import { NgIf } from '@angular/common'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
 const { ethereum } = window
 const BankAddress = '0x413744D59d31AFDC2889aeE602636177805Bd7b0'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const client = createClient({
   autoConnect: true,
   provider: getDefaultProvider()
@@ -21,7 +29,8 @@ const client = createClient({
 @Component({
   selector: 'app-wallet-web3',
   templateUrl: './wallet-web3.component.html',
-  styleUrls: ['./wallet-web3.component.scss']
+  styleUrls: ['./wallet-web3.component.scss'],
+  imports: [MatCardModule, MatButtonModule, NgIf, TranslateModule, MatFormFieldModule, MatLabel, MatInputModule, FormsModule, MatIconModule]
 })
 export class WalletWeb3Component {
   constructor (
@@ -59,6 +68,7 @@ export class WalletWeb3Component {
       const transaction = await contract.ethdeposit(this.metamaskAddress, {
         value: ethers.utils.parseEther(depositAmount)
       })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const txConfirmation = await transaction.wait()
       this.getUserEthBalance()
     } catch (error) {
@@ -76,6 +86,7 @@ export class WalletWeb3Component {
       const transaction = await contract.withdraw(
         ethers.utils.parseEther(withdrawalAmount)
       )
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const txConfirmation = await transaction.wait()
       this.getUserEthBalance()
     } catch (error) {

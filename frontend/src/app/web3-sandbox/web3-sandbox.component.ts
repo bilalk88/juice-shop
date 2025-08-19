@@ -1,20 +1,27 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core'
+import { Component, ChangeDetectorRef } from '@angular/core'
 import { KeysService } from '../Services/keys.service'
 import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
-import { getDefaultProvider, ethers, BigNumber } from 'ethers'
+import { getDefaultProvider, ethers } from 'ethers'
 import {
   createClient,
   connect,
   disconnect,
   getAccount,
-  signMessage,
   InjectedConnector
 } from '@wagmi/core'
 import {
-  solidityCompiler,
-  getCompilerVersions
+  solidityCompiler
 } from 'solidity-browser-compiler'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field'
+import { TranslateModule } from '@ngx-translate/core'
+import { NgIf, NgFor } from '@angular/common'
+import { MatButtonModule } from '@angular/material/button'
+import { FormsModule } from '@angular/forms'
+import { CodemirrorModule } from '@ctrl/ngx-codemirror'
+import { MatIconModule } from '@angular/material/icon'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const client = createClient({
   autoConnect: true,
   provider: getDefaultProvider()
@@ -34,7 +41,8 @@ const compilerReleases = {
 @Component({
   selector: 'app-web3-sandbox',
   templateUrl: './web3-sandbox.component.html',
-  styleUrls: ['./web3-sandbox.component.scss']
+  styleUrls: ['./web3-sandbox.component.scss'],
+  imports: [CodemirrorModule, FormsModule, MatButtonModule, MatIconModule, NgIf, TranslateModule, MatFormFieldModule, MatLabel, MatInputModule, NgFor]
 })
 export class Web3SandboxComponent {
   constructor (
@@ -302,7 +310,7 @@ contract HelloWorld {
       console.log('session', this.session)
       this.changeDetectorRef.detectChanges()
     } catch (err) {
-      console.log('An error occured')
+      console.log('An error occurred')
     }
   }
 }

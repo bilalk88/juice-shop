@@ -40,8 +40,10 @@
   difficulty: 2
   hint: 'It is just slightly harder to find than the score board link.'
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/broken-access-control.html#_access_the_administration_section_of_the_store'
-  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: adminSectionChallenge
+  tutorial:
+    order: 8
 -
   name: 'Arbitrary File Write'
   category: 'Vulnerable Components'
@@ -328,7 +330,7 @@
   difficulty: 2
   hint: 'Once you found admin section of the application, this challenge is almost trivial.'
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/broken-access-control.html#_get_rid_of_all_5_star_customer_feedback'
-  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: feedbackChallenge
 -
   name: 'Forged Coupon'
@@ -351,10 +353,10 @@
   difficulty: 3
   hint: 'You can solve this by tampering with the user interface or by intercepting the communication with the RESTful backend.'
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/broken-access-control.html#_post_some_feedback_in_another_users_name'
-  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: forgedFeedbackChallenge
   tutorial:
-    order: 8
+    order: 11
 -
   name: 'Forged Review'
   category: 'Broken Access Control'
@@ -362,7 +364,7 @@
   difficulty: 3
   hint: 'Observe the flow of product review posting and editing and see if you can exploit it.'
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/broken-access-control.html#_post_a_product_review_as_another_user_or_edit_any_users_existing_review'
-  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: forgedReviewChallenge
 -
   name: 'Forged Signed JWT'
@@ -498,7 +500,7 @@
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'
   key: loginAdminChallenge
   tutorial:
-    order: 5
+    order: 7
 -
   name: 'Login Amy'
   category: 'Sensitive Data Exposure'
@@ -522,7 +524,7 @@
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'
   key: loginBenderChallenge
   tutorial:
-    order: 10
+    order: 13
 -
   name: 'Login Bjoern'
   category: 'Broken Authentication'
@@ -546,7 +548,7 @@
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'
   key: loginJimChallenge
   tutorial:
-    order: 9
+    order: 12
 -
   name: 'Login MC SafeSearch'
   category: 'Sensitive Data Exposure'
@@ -578,7 +580,7 @@
   difficulty: 3
   hint: 'Have an eye on the HTTP traffic while placing products in the shopping basket. Changing the quantity of products already in the basket doesn''t count.'
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/broken-access-control.html#_put_an_additional_product_into_another_users_shopping_basket'
-  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: basketManipulateChallenge
 -
   name: 'Misplaced Signature File'
@@ -676,7 +678,7 @@
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html'
   key: weakPasswordChallenge
   tutorial:
-    order: 6
+    order: 9
 -
   name: 'Payback Time'
   category: 'Improper Input Validation'
@@ -737,6 +739,7 @@
   name: 'Reflected XSS'
   category: 'XSS'
   tags:
+    - Tutorial
     - Danger Zone
     - Good for Demos
   description: 'Perform a <i>reflected</i> XSS attack with <code>&lt;iframe src="javascript:alert(`xss`)"&gt;</code>.'
@@ -745,6 +748,8 @@
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/xss.html#_perform_a_reflected_xss_attack'
   mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html'
   key: reflectedXssChallenge
+  tutorial:
+    order: 5
   disabledEnv:
     - Docker
     - Heroku
@@ -987,10 +992,10 @@
   difficulty: 2
   hint: 'Have an eye on the HTTP traffic while shopping. Alternatively try to find a client-side association of users to their basket.'
   hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/broken-access-control.html#_view_another_users_shopping_basket'
-  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
   key: basketAccessChallenge
   tutorial:
-    order: 7
+    order: 10
 -
   name: 'Vulnerable Library'
   category: 'Vulnerable Components'
@@ -1053,6 +1058,21 @@
   - Heroku
   - Gitpod
 -
+  name: 'Memory Bomb'
+  category: 'Insecure Deserialization'
+  tags:
+    - Danger Zone
+  description: 'Drop some explosive data into a vulnerable file-handling endpoint.'
+  difficulty: 5
+  hint: 'This one is actually similar to the XXE DoS challenge in every way except the data format being (ab)used.'
+  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/insecure-deserialization.html#_drop_some_explosive_data_into_a_vulnerable_file_handling_endpoint'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html'
+  key: yamlBombChallenge
+  disabledEnv:
+  - Docker
+  - Heroku
+  - Gitpod
+-
   name: 'Zero Stars'
   category: 'Improper Input Validation'
   description: 'Give a devastating zero-star feedback to the store.'
@@ -1077,10 +1097,10 @@
   category: 'Security Misconfiguration'
   tags:
     - Contraption
-  description: 'Stick <a href="http://placekitten.com/" target="_blank">cute cross-domain kittens</a> all over our delivery boxes.'
+  description: 'Stick <a href="https://cataas.com/cat" target="_blank">cute cross-domain kittens</a> all over our delivery boxes.'
   difficulty: 5
   hint: 'This challenge would formally have to be in several categories as the developers made multiple gaffes for this to be possible.'
-  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/injection.html#_stick_cute_cross_domain_kittens_all_over_our_delivery_boxes'
+  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/security-misconfiguration.html#_stick_cute_cross_domain_kittens_all_over_our_delivery_boxes'
   mitigationUrl: ~
   key: svgInjectionChallenge
 -
@@ -1214,6 +1234,35 @@
   description: 'Close multiple "Challenge solved"-notifications in one go.'
   difficulty: 1
   hint: 'Either check the official documentation or inspect a notification UI element directly.'
-  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/score-board.html#_close_multiple_challenge_solved_notifications_in_one_go'
+  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/miscellaneous.html#_close_multiple_challenge_solved_notifications_in_one_go'
   mitigationUrl: ~
   key: closeNotificationsChallenge
+-
+  name: 'Security Advisory'
+  category: 'Miscellaneous'
+  description: 'The Juice Shop is susceptible to a known vulnerability in a library, for which an advisory has already been issued, marking the Juice Shop as <i>known affected</i>. A fix is still pending. <a href="/#/contact">Inform the shop</a> about a suitable checksum as proof that you did your due diligence.'
+  difficulty: 3
+  hint: 'Security Advisories are often listed in the security.txt'
+  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/miscellaneous.html#_the_juice_shop_is_susceptible_to_a_known_vulnerability_in_a_library_for_which_an_advisory_has_already_been_issued'
+  mitigationUrl: ~
+  key: csafChallenge
+-
+  name: 'Exposed credentials'
+  category: 'Sensitive Data Exposure'
+  description: 'A developer was careless with hardcoding unused, but still valid credentials for a testing account on the client-side.'
+  difficulty: 2
+  hint: 'Have a look at the client-side code in the dev console.'
+  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/sensitive-data-exposure.html#_a_developer_was_careless_with_hardcoding_unused_but_still_valid_credentials'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html'
+  key: exposedCredentialsChallenge
+  tutorial:
+    order: 6
+-
+  name: 'Leaked API Key'
+  category: 'Sensitive Data Exposure'
+  description: '<a href="/#/contact">Inform the shop</a> about a leaked API key. (Mention the exact key in your comment)'
+  difficulty: 5
+  hint: 'The API call is part of a scheduled process "behind the scenes", i.e. completely unrelated to the web application.'
+  hintUrl: 'https://pwning.owasp-juice.shop/companion-guide/latest/part2/sensitive-data-exposure.html#_inform_the_shop_about_a_leaked_api_key'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html'
+  key: leakedApiKeyChallenge

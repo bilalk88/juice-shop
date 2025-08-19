@@ -16,17 +16,24 @@
     <!-- info text if the challenge is unavailable -->
     <button
       class="badge"
-      *ngIf="challenge.disabledEnv !== null"
+      *ngIf="challenge.disabledEnv !== null && challenge.disabledEnv !== 'safetyMode'"
       [matTooltip]="'CHALLENGE_UNAVAILABLE' | translate:{ env: challenge.disabledEnv }"
+    >
+      <mat-icon [style.color]="'var(--theme-warn)'">info_outline</mat-icon>
+    </button>
+    <button
+      class="badge"
+      *ngIf="challenge.disabledEnv === 'safetyMode'"
+      [matTooltip]="'CHALLENGE_UNAVAILABLE_SAFETYMODE'| translate:{ env: challenge.disabledEnv}"
     >
       <mat-icon [style.color]="'var(--theme-warn)'">info_outline</mat-icon>
     </button>
     <!-- coding challenge badge -->
     <button
       class="badge"
-      *ngIf="challenge.hasCodingChallenge"
+      *ngIf="applicationConfiguration.challenges.codingChallengesEnabled !== 'never' && challenge.hasCodingChallenge"
       (click)="openCodingChallengeDialog(challenge.key)"
-      [disabled]="challenge.solved === false"
+      [disabled]="challenge.solved === false && applicationConfiguration.challenges.codingChallengesEnabled !== 'always'"
       [ngClass]="{
         'partially-completed': challenge.codingChallengeStatus === 1,
         'completed': challenge.codingChallengeStatus === 2
@@ -61,7 +68,7 @@
     <!-- hacking instructor-->
     <button
       class="badge not-completable"
-      *ngIf="hasInstructions(challenge.name)"
+      *ngIf="applicationConfiguration.hackingInstructor.isEnabled && hasInstructions(challenge.name)"
       [matTooltip]="'INFO_HACKING_INSTRUCTOR' | translate"
       (click)="startHackingInstructorFor(challenge.name)"
     >

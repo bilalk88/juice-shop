@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
 
 import { Injectable } from '@angular/core'
 import { type Backup } from '../Models/backup.model'
-import { CookieService } from 'ngx-cookie'
+import { CookieService } from 'ngy-cookie'
 import { saveAs } from 'file-saver'
 import { SnackBarHelperService } from './snack-bar-helper.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -23,14 +23,6 @@ export class LocalBackupService {
   save (fileName: string = 'owasp_juice_shop') {
     const backup: Backup = { version: this.VERSION }
 
-    backup.scoreBoard = {
-      scoreBoardVersion: localStorage.getItem('score-board-version') ? JSON.parse(String(localStorage.getItem('score-board-version'))) : undefined,
-      displayedDifficulties: localStorage.getItem('displayedDifficulties') ? JSON.parse(String(localStorage.getItem('displayedDifficulties'))) : undefined,
-      showSolvedChallenges: localStorage.getItem('showSolvedChallenges') ? JSON.parse(String(localStorage.getItem('showSolvedChallenges'))) : undefined,
-      showDisabledChallenges: localStorage.getItem('showDisabledChallenges') ? JSON.parse(String(localStorage.getItem('showDisabledChallenges'))) : undefined,
-      showOnlyTutorialChallenges: localStorage.getItem('showOnlyTutorialChallenges') ? JSON.parse(String(localStorage.getItem('showOnlyTutorialChallenges'))) : undefined,
-      displayedChallengeCategories: localStorage.getItem('displayedChallengeCategories') ? JSON.parse(String(localStorage.getItem('displayedChallengeCategories'))) : undefined
-    }
     backup.banners = {
       welcomeBannerStatus: this.cookieService.get('welcomebanner_status') ? this.cookieService.get('welcomebanner_status') : undefined,
       cookieConsentStatus: this.cookieService.get('cookieconsent_status') ? this.cookieService.get('cookieconsent_status') : undefined
@@ -61,12 +53,6 @@ export class LocalBackupService {
       const backup: Backup = JSON.parse(backupData)
 
       if (backup.version === this.VERSION) {
-        this.restoreLocalStorage('score-board-version', backup.scoreBoard?.scoreBoardVersion)
-        this.restoreLocalStorage('displayedDifficulties', backup.scoreBoard?.displayedDifficulties)
-        this.restoreLocalStorage('showSolvedChallenges', backup.scoreBoard?.showSolvedChallenges)
-        this.restoreLocalStorage('showDisabledChallenges', backup.scoreBoard?.showDisabledChallenges)
-        this.restoreLocalStorage('showOnlyTutorialChallenges', backup.scoreBoard?.showOnlyTutorialChallenges)
-        this.restoreLocalStorage('displayedChallengeCategories', backup.scoreBoard?.displayedChallengeCategories)
         this.restoreCookie('welcomebanner_status', backup.banners?.welcomeBannerStatus)
         this.restoreCookie('cookieconsent_status', backup.banners?.cookieConsentStatus)
         this.restoreCookie('language', backup.language)
@@ -75,7 +61,8 @@ export class LocalBackupService {
         this.restoreCookie('continueCode', backup.continueCode)
 
         const snackBarRef = this.snackBar.open('Backup has been restored from ' + backupFile.name, 'Apply changes now', {
-          duration: 10000
+          duration: 10000,
+          panelClass: ['mat-body']
         })
         snackBarRef.onAction().subscribe(() => {
           const hackingProgress = backup.continueCode ? this.challengeService.restoreProgress(encodeURIComponent(backup.continueCode)) : of(true)
@@ -100,14 +87,6 @@ export class LocalBackupService {
       this.cookieService.put(cookieName, cookieValue, { expires })
     } else {
       this.cookieService.remove(cookieName)
-    }
-  }
-
-  private restoreLocalStorage (propertyName: string, propertyValue: any) {
-    if (propertyValue) {
-      localStorage.setItem(propertyName, JSON.stringify(propertyValue))
-    } else {
-      localStorage.removeItem(propertyName)
     }
   }
 }
